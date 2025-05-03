@@ -1,0 +1,17 @@
+Python
+Machine Learning
+Deep Learning
+NLP
+Flask
+Django
+Pandas
+NumPy
+TensorFlow
+Keras
+Data Analysis
+Data Science
+SQL
+Git
+AWS
+REST API
+Docker

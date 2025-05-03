@@ -1,15 +1,21 @@
 from flask import Flask, request, render_template
 import spacy
 from spacy.matcher import Matcher
+import pdfplumber
 
 app = Flask(__name__)
 nlp = spacy.load("en_core_web_sm")
+
+def load_skills(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        return [line.strip().lower() for line in f if line.strip()]
+
+skill_list = load_skills('skills.txt')
+
 matcher = Matcher(nlp.vocab)  
 
-skills = ["python", "machine learning", "data analysis", "django", "flask", "tensorflow"]
-
-for skill in skills:
-    pattern = [{"LOWER": token.lower() for token in skill.split()}]
+for skill in skill_list:
+    pattern = [{"LOWER": token} for token in skill.split()]
     matcher.add(skill, [pattern])
 
 
@@ -28,7 +34,7 @@ def upload():
     if filename.endswith('.txt'):
         text = file.read().decode('utf-8')
     elif filename.endswith('.pdf'):
-        with pdfplumber.opem(file) as pdf:
+        with pdfplumber.open(file) as pdf:
             text = ''
             for page in pdf.pages:
                 text += page.extract.text() + '\n'
