@@ -7,9 +7,16 @@
 </head>
 <body>
     <h2>Upload your Resume</h2>
-    <form method="POST" action="/upload" enctype="multipart/form-data">
-        <input type="file" name="resume" accept=".txt" required>
-        <button type="submit">Upload</button>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <!-- Resume upload -->
+        <label for="resume">Upload Resume (TXT or PDF):</label>
+        <input type="file" name="resume" accept=".txt,.pdf" required><br><br>
+
+        <!-- Job Description input -->
+        <label for="job_description">Job Description:</label><br>
+        <textarea name="job_description" rows="10" cols="50" placeholder="Paste the job description here..." required></textarea><br><br>
+
+        <input type="submit" value="Upload and Match">
     </form>
 </body>
 </html>
